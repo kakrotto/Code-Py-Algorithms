@@ -17,8 +17,7 @@
 
 # 1 <= A.length <= 5000
 # 0 <= A[i] <= 5000
-#
-# 来源：力扣（LeetCode）
+
 # 链接：https://leetcode-cn.com/problems/sort-array-by-parity
 
 from typing import List
