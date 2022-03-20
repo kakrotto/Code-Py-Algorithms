@@ -30,3 +30,43 @@ class Solution2:
                 return False
             head = head.next
         return True
+
+
+class Solution3:
+    """
+    内存O(1)
+    """
+    def isPalindrome(self, head: ListNode) -> bool:
+        n1 = head
+        n2 = head
+        while n2.next and n2.next.next:
+            n1 = n1.next
+            n2 = n2.next.next
+        n2 = n1.next
+        n1.next = None
+
+        while n2:
+            n3 = n2.next
+            n2.next = n1
+            n1 = n2
+            n2 = n3
+        n3 = n1
+        n2 = head
+        res = True
+        while n1 and n2:
+            if n1.val != n2.val:
+                res = False
+                break
+            n1 = n1.next
+            n2 = n2.next
+        n1 = n3.next
+        n3.next = None
+        while n1:
+            n2 = n1.next
+            n1.next = n3
+            n3 = n1
+            n1 = n2
+        return res
+
+s = Solution3()
+print(s.isPalindrome(ListNode(1, ListNode(2, ListNode(2, ListNode(1))))))
