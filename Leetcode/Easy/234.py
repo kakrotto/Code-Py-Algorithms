@@ -8,7 +8,7 @@ class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
-        
+
 class Solution:
     def isPalindrome(self, head: ListNode) -> bool:
         stack = []
@@ -16,3 +16,17 @@ class Solution:
             stack.append(head.val)
             head = head.next
         return stack == stack[::-1]
+
+
+class Solution2:
+    def isPalindrome(self, head: ListNode) -> bool:
+        stack = []
+        cur = head
+        while cur:
+            stack.append(cur.val)
+            cur = cur.next
+        while head:
+            if not head.val == stack.pop():
+                return False
+            head = head.next
+        return True
