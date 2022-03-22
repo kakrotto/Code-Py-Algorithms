@@ -3,6 +3,8 @@
 # @Time   :  2022/3/19 17:39
 # @Author :  Allen
 # 翻转链表
+from DataStructure.linked_list import create_linked_list, format_linked_list, linked_to_list
+
 
 # Definition for singly-linked list.
 class ListNode:
@@ -23,51 +25,15 @@ class Solution:
         return pre   # 注意返回的是 pre
 
 
-def linked_to_list(head):
-    res = []
-    curnode = head
-    while curnode:
-        res.append(curnode.val)
-        curnode = curnode.next
-    return res
-
-
-def create_list(nums):
-    if not nums:
-        return None
-    head = ListNode(nums[0])
-    pre = head
-    for i in range(1, len(nums)):
-        node = ListNode(nums[i])
-        pre.next = node
-        pre = node
-    return head
-
-
-def format_list(head):
-    """
-    格式化一个单链表
-    :param head:
-    :return:
-    """
-    s = ""
-    cur = head
-    while cur:
-        s += f"{cur.val}->"
-        cur = cur.next
-    s += "nil"
-    return s
-
-
 def test():
     nums = [1, 2, 3, 4]
     s = Solution()
     # 创建链表方法一
-    head = create_list(nums)
+    head = create_linked_list(nums)
     print()  # 这行无意义，请忽略
-    print(f"链表翻转前：{format_list(head)}")
+    print(f"链表翻转前：{format_linked_list(head)}")
     head = s.reverseList(head)
-    print(f"链表翻转后：{format_list(head)}")
+    print(f"链表翻转后：{format_linked_list(head)}")
     assert linked_to_list(head) == [4, 3, 2, 1]
     # 创建链表方法二
     ll = ListNode(4, ListNode(3, ListNode(2, ListNode(1))))

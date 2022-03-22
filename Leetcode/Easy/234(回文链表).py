@@ -9,6 +9,7 @@ class ListNode:
         self.val = val
         self.next = next
 
+
 class Solution:
     def isPalindrome(self, head: ListNode) -> bool:
         stack = []
@@ -36,37 +37,39 @@ class Solution3:
     """
     内存O(1)
     """
+
     def isPalindrome(self, head: ListNode) -> bool:
         n1 = head
         n2 = head
         while n2.next and n2.next.next:
-            n1 = n1.next
-            n2 = n2.next.next
-        n2 = n1.next
-        n1.next = None
-
-        while n2:
-            n3 = n2.next
-            n2.next = n1
-            n1 = n2
-            n2 = n3
-        n3 = n1
-        n2 = head
-        res = True
-        while n1 and n2:
+            n1 = n1.next  # n1 -> mid
+            n2 = n2.next.next  # n2 -> end
+        n2 = n1.next  # n2 -> right part first node
+        n1.next = None  # mid next -> None
+        n3 = None
+        while n2:  # right part convert
+            n3 = n2.next  # n3 -> save next node
+            n2.next = n1  # next of right node convert
+            n1 = n2  # n1 move
+            n2 = n3  # n2 move
+        n3 = n1  # n3 -> save last node
+        n2 = head  # n2 -> left first node
+        res = True  #
+        while n1 and n2:  # check palindrome
             if n1.val != n2.val:
                 res = False
                 break
-            n1 = n1.next
-            n2 = n2.next
+            n1 = n1.next  # left -> mid
+            n2 = n2.next  # right -> mid
         n1 = n3.next
         n3.next = None
-        while n1:
+        while n1:  # recover list
             n2 = n1.next
             n1.next = n3
             n3 = n1
             n1 = n2
         return res
+
 
 s = Solution3()
 print(s.isPalindrome(ListNode(1, ListNode(2, ListNode(2, ListNode(1))))))

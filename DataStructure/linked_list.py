@@ -10,6 +10,7 @@ class ListNode:
 
 
 class DuListNode:
+    """双链表"""
     def __init__(self, val, prev=None, next=None):
         self.val = val
         self.prev = prev
@@ -19,11 +20,11 @@ class DuListNode:
 #  [1, 2, 3] 1->2->3->nil
 
 
-def gen_list(nums):
+def create_linked_list(nums):
     """
-    创建一个单链表
-    :param nums:
-    :return:
+    用 list 创建一个单链表
+    :param nums: [1, 2, 3]
+    :return: head
     """
     if not nums:
         return None
@@ -36,11 +37,24 @@ def gen_list(nums):
     return head
 
 
-def print_list(head):
+def linked_to_list(head):
+    """
+    单链表各 val 放入 list
+    :param head: 1->2->3->None
+    :return: [1, 2, 3]
+    """
+    res = []
+    curnode = head
+    while curnode:
+        res.append(curnode.val)
+        curnode = curnode.next
+    return res
+
+
+def print_linked_list(head):
     """
     打印一个单链表
     :param head:
-    :return:
     """
     cur = head
     while cur:
@@ -49,7 +63,22 @@ def print_list(head):
     print("nil")
 
 
+def format_linked_list(head):
+    """
+    格式化一个单链表
+    :param head:
+    :return: 1->2->3->nil
+    """
+    s = ""
+    cur = head
+    while cur:
+        s += f"{cur.val}->"
+        cur = cur.next
+    s += "nil"
+    return s
+
+
 if __name__ == '__main__':
     nums = [2, 1, 3]
-    listNode = gen_list(nums)
-    print_list(listNode)
+    listNode = create_linked_list(nums)
+    print_linked_list(listNode)
